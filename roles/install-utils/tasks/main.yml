@@ -39,10 +39,10 @@
     path: "{{ ansible_env.HOME }}/.config/terminator"
     state: directory
 
-- name: "Make terminator the default terminal"
-  shell: "update-alternatives --set x-terminal-emulator /usr/bin/terminator"
-  become: true
-
+- name: Configure Terminator
+  copy:
+    src: "{{ role_path }}/files/terminator_config"
+    dest: "{{ ansible_env.HOME }}/.config/terminator/config"
 #### BASHRC ####
 - name: Copy .bashrc to home
   copy:
@@ -65,3 +65,7 @@
     - net-tools
   become: true
 
+#### Default Terminal ####
+- name: "Make terminator the default terminal"
+  shell: "update-alternatives --set x-terminal-emulator /usr/bin/terminator"
+  become: true
