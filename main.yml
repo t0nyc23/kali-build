@@ -1,0 +1,7 @@
+---
+- name: "Customizing Kali"
+  hosts: localhost
+  connection: local
+  roles:
+    - role: "roles/configure-xfce"
+    - role: "roles/install-utils"
