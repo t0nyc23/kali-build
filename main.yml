@@ -3,6 +3,6 @@
   hosts: localhost
   connection: local
   roles:
-#    - role: "roles/configure-xfce"
-#    - role: "roles/install-utils"
+    - role: "roles/configure-xfce"
+    - role: "roles/install-utils"
     - role: "roles/configure-firefox"
