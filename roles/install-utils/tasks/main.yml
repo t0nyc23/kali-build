@@ -63,9 +63,15 @@
     - sublime-text
     - cherrytree
     - net-tools
+    - mlocate
   become: true
 
 #### Default Terminal ####
 - name: "Make terminator the default terminal"
   shell: "update-alternatives --set x-terminal-emulator /usr/bin/terminator"
+  become: true
+
+#### updatedb ####
+- name: "configure mlocate"
+  shell: "updatedb"
   become: true

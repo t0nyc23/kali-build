@@ -7,6 +7,9 @@
 - name: "Install Backgrounds"
   shell: "cp -r {{ role_path }}/files/backgrounds/* /usr/share/backgrounds/kali-16x9/"
   become: true
+- name: "lightdb-gtk-greeter settings"
+  shell: "cp {{ role_path }}/files/lightdm-gtk-greeter.conf /etc/lightdm/"
+  become: true
 - name: "Configure XFCE4 and QT5"
   shell: "cp -r {{ role_path }}/files/config/* {{ ansible_env.HOME }}/.config/"
   become: true

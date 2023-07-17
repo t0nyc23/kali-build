@@ -1,0 +1,3 @@
+---
+# tasks file for configure-firefox
+- include: "firefox.yml"

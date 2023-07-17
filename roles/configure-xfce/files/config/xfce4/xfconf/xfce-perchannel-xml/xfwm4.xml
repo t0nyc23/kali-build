@@ -2,8 +2,8 @@
 
 <channel name="xfwm4" version="1.0">
   <property name="general" type="empty">
-    <property name="button_layout" type="string" value="O|HMC"/>
-    <property name="theme" type="string" value="Old_Xfce_Default"/>
+    <property name="button_layout" type="string" value="|HMC"/>
+    <property name="theme" type="string" value="Kali-X"/>
     <property name="title_font" type="empty"/>
     <property name="easy_click" type="empty"/>
     <property name="workspace_count" type="int" value="2"/>

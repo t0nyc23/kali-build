@@ -5,10 +5,11 @@
     background_darkness = 0.95
     cursor_shape = underline
     font = Monospace 12
-    foreground_color = "#ffffff"
     show_titlebar = False
     scrollback_infinite = True
     use_system_font = False
+    title_transmit_bg_color = "#000000"
+    title_inactive_bg_color = "#000000"
 [layouts]
   [[default]]
     [[[window0]]]

@@ -1,0 +1,7 @@
+---
+# vars file for configure-firefox
+FirefoxPlugins:
+  - "foxyproxy-standard"
+  - "ublock-origin"
+  - "wappalyzer"
+#  - "darkreader"

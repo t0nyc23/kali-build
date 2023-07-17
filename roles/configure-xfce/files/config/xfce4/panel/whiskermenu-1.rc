@@ -1,5 +1,5 @@
 favorites=xfce4-terminal-emulator.desktop,root-terminal.desktop,xfce4-file-manager.desktop,xfce-text-editor.desktop,xfce4-web-browser.desktop,kali-www.desktop,kali-docs.desktop,kali-bugs.desktop,offsec-training.desktop,exploit-database.desktop,vulnhub.desktop
-recent=xfce-ui-settings.desktop,xfce-wmtweaks-settings.desktop,xfce-wm-settings.desktop,xfce4-power-manager-settings.desktop,org.xfce.PanelProfiles.desktop,firefox-esr.desktop,xfce4-file-manager.desktop,org.xfce.mousepad.desktop,xfce4-mime-settings.desktop
+recent=xfce4-file-manager.desktop,xfce-wm-settings.desktop,xfce-ui-settings.desktop,cherrytree.desktop,sublime_text.desktop,xfce-wmtweaks-settings.desktop,xfce4-power-manager-settings.desktop,org.xfce.PanelProfiles.desktop,firefox-esr.desktop,org.xfce.mousepad.desktop
 button-icon=kali-menu
 button-single-row=false
 show-button-title=false
