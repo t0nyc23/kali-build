@@ -3,7 +3,7 @@
 [profiles]
   [[default]]
     background_darkness = 0.95
-    cursor_shape = underline
+    cursor_shape = block
     font = Monospace 12
     show_titlebar = False
     scrollback_infinite = True
