@@ -63,7 +63,7 @@
     - sublime-text
     - cherrytree
     - net-tools
-    - mlocate
+    - plocate
   become: true
 
 #### Default Terminal ####
