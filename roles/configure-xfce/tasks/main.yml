@@ -13,11 +13,15 @@
   shell: "cp {{ role_path }}/files/lightdm-gtk-greeter.conf /etc/lightdm/"
   become: true
 
-#### XFCE4
+#### XFCE4 #####
 - name: "Remove Old xfce4 configs"
   shell: "rm -rf {{ ansible_env.HOME }}/.config/xfce4"
 - name: "Configure xfce4 "
   shell: "cp -r {{ role_path }}/files/config/xfce4 {{ ansible_env.HOME }}/.config/"
+
+#### XFCE4 PANEL #####
+- name: "Configuring xfce panel"
+  shell: "xfce4-panel-profiles load {{ role_path }}/files/panel.tar.bz2"
 
 #### QT5CT #####
 - name: "Remove Old qt5ct configs"
