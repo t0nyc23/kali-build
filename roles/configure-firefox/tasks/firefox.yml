@@ -6,5 +6,10 @@
   become: true
   become_method: sudo
 
+- name: "Create .mozzila directory"
+  file:
+    path: "{{ ansible_env.HOME }}/.mozilla"
+    state: directory
+
 - name: "Copy custom settings and bookmarks"
   shell: "cp -r {{ role_path }}/files/firefox {{ ansible_env.HOME }}/.mozilla/"
