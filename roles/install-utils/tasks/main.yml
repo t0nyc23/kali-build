@@ -70,7 +70,7 @@
 
 #### Default Terminal ####
 - name: "Make xfce4-terminal the default terminal"
-  shell: "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal"
+  shell: "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal.wrapper"
   become: true
 
 #### updatedb ####
