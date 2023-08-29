@@ -64,11 +64,13 @@
     - cherrytree
     - net-tools
     - plocate
+    - xfce4-terminal
+    - kali-legacy-wallpapers
   become: true
 
 #### Default Terminal ####
-- name: "Make terminator the default terminal"
-  shell: "update-alternatives --set x-terminal-emulator /usr/bin/terminator"
+- name: "Make xfce4-terminal the default terminal"
+  shell: "update-alternatives --set x-terminal-emulator /usr/bin/xfce4-terminal"
   become: true
 
 #### updatedb ####
