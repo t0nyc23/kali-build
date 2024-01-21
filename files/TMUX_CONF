@@ -1,0 +1,38 @@
+# Set prefix to CTLR - SPACE
+#unbind C-b
+#set -g prefix C-Space
+#bind C-Space send-prefix
+
+# FIRST THEME FOR STATUS BAR
+#set-option -g status-position top
+#set -g pane-border-style "fg=#0f0f0f"
+#set -g pane-active-border-style "bg=default fg=#0f0f0f"
+#set -g status-style bg=default 
+#set -g status-style fg=default 
+
+
+# OPEN PANES AND WINDOWS IN CWD
+#bind '"' split-window -c "#{pane_current_path}"
+#bind % split-window -h -c "#{pane_current_path}"
+#bind c new-window -c "#{pane_current_path}"
+
+#ENABLE MOUSE
+set -g mouse on
+
+# Use Alt-arrow keys without prefix key to switch panes
+#bind -n M-Left select-pane -L
+#bind -n M-Right select-pane -R
+#bind -n M-Up select-pane -U
+#bind -n M-Down select-pane -D
+
+# Vim style pane selection
+#bind h select-pane -L
+#bind j select-pane -D 
+#bind k select-pane -U
+#bind l select-pane -R
+
+# Shift arrow to switch windows
+#bind -n S-Left  previous-window
+#bind -n S-Right next-window
+
+#unbind -n MouseDown3Pane
