@@ -3,8 +3,6 @@
 source utils_and_vars.sh
 
 install_themes(){
-	local lightdm_dest="/etc/lightdm/"
-	
 	local themes_dest="/usr/share/themes/"
 	local icons_dest="/usr/share/icons/"
 	local theme_link="https://gitlab.com/kalilinux/packages/gnome-theme-kali/-/archive/kali/master/gnome-theme-kali-kali-master.zip"
@@ -45,6 +43,8 @@ configure_xfce4_desktop(){
 	local dest_xfce_conf="$HOME/.config/xfce4"
 	local src_xfce_conf="$CONFIG_DIR/xfce4/*"
 	local panel_config="$FILES_DIR/non-custom-panel.tar.bz2"
+	local lightdm_dest="/etc/lightdm/"
+	local lightdm_src="$FILES_DIR/lightdm-gtk-greeter.conf"
 	
 	print_header "Configuring XFCE4 desktop environment."
 	print_status "Importing XFCE4 settings."
@@ -57,6 +57,9 @@ configure_xfce4_desktop(){
 
 	print_status "Importing custom panel configuration."
 	xfce4-panel-profiles load $panel_config
+	
+	print_status "Installing LightDM greeter configuration."
+	sudo cp $lightdm_src $lightdm_dest
 }
 
 configure_move2screen(){
@@ -75,8 +78,16 @@ configure_move2screen(){
 
 configure_bashrc(){
 	local bashrc_file="$FILES_DIR/BASHRC"
-	print_header "Configuring .bashrc"
+	local me=$USER
+	print_header "Configuring user shells"
+	print_status "Configuring shell for $me"
+	sudo chsh -s /usr/bin/bash $me
+	print_status "Configuring shell for root"
+	sudo chsh -s /usr/bin/bash $USER
+	print_status "Copying $bashrc_file for $USER"
 	cp $bashrc_file $HOME/.bashrc
+	print_status "Copying $bashrc_file for root"
+	sudo cp $bashrc_file $HOME/.bashrc
 }
 
 configure_tmux(){

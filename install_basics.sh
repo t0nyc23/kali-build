@@ -9,7 +9,7 @@ install_basic_utils(){
 		'flameshot' 'wget' 'vlc' 'curl' 'zip'
 		'xcape' 'prips' 'xdotool' 'dnsutils'
 		'piper' 'gdebi' 'gparted' 'cherrytree'
-		'linux-headers-amd64' 'wmctrl' 'gnome-colors' 'peek'
+		'linux-headers-amd64' 'wmctrl' 'peek'
 		'lightdm-gtk-greeter-settings' 'xfce4-terminal' 'plocate'
 		'libxfce4ui-2-dev' 'python3-psutil' 'make' 'gettext' 'intltool'
 	)
