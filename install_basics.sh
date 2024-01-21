@@ -10,7 +10,8 @@ install_basic_utils(){
 		'xcape' 'prips' 'xdotool' 'dnsutils'
 		'piper' 'gdebi' 'gparted' 'cherrytree'
 		'linux-headers-amd64' 'wmctrl' 'gnome-colors' 'peek'
-		'lightdm-gtk-greeter-settings' 'xfce4-panel-profiles'
+		'lightdm-gtk-greeter-settings' 'xfce4-terminal' 'plocate'
+		'libxfce4ui-2-dev' 'python3-psutil' 'make' 'gettext' 'intltool'
 	)
 	print_status "Doing an update."
 	sudo apt-get update >> $logfile
@@ -21,92 +22,18 @@ install_basic_utils(){
 	print_status "Done installing basic utilities/software."
 }
 
-install_snap_tools(){
-	print_header "Snap packages auto-cpufreq and Video-Downloader"
-	local logfile="$LOG_DIR/install_snap_tools.log"
-	print_status "Doing an update."
-	sudo apt-get update >> $logfile
-	print_status "Installing: snapd"
-	sudo apt-get -y install snapd >> $logfile
-	if [ $? -eq 0 ];then
-		print_status "Installing snap: core"
-		sudo snap install core >> $logfile
-		print_status "Installing snap: video-downloader"
-		sudo snap install video-downloader >> $logfile
-		print_status "Installing snap: auto-cpufreq"
-		sudo snap install auto-cpufreq >> $logfile
-		print_status "Finished Setting Up Snap software."
-	else
-		print_error "Failed to install snapd"
-	fi
-}
-
-install_virtualbox(){
-	local logfile="$LOG_DIR/install_virtualbox.log"
-	local vboxasc="https://www.virtualbox.org/download/oracle_vbox_2016.asc"
-	local vboxascout="/usr/share/keyrings/oracle-virtualbox-2016.gpg"
-	local vboxexturl="https://download.virtualbox.org/virtualbox/7.0.12/Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack"
-	local vboxext=`echo $vboxexturl | awk -F '/' '{print $6}'`
-	print_header "VirtualBox and VirtualBox Extension Pack."
-	print_status "Importing GPG keys from ${vboxasc}"
-	wget -O- -q $vboxasc | sudo gpg --dearmor -o $vboxascout >> $logfile
-	if [ $? -eq 0 ]; then
-		print_status "Adding VirtualBox Repository."
-		echo "deb [arch=amd64 signed-by=${vboxascout}] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | \
-			sudo tee /etc/apt/sources.list.d/virtualbox.list >> $logfile
-		if [ $? -eq 0 ]; then
-			print_status "Doing an update."
-			sudo apt-get update
-			print_status "Installing: VirtualBox"
-			sudo apt-get -y install virtualbox-7.0 >> $logfile
-			if [ $? -eq 0 ]; then
-				print_status "Adding $USER to vboxusers"
-				sudo usermod -aG vboxusers $USER
-				print_status "Donwloading extension pack from ${vboxexturl}"
-				wget -q $vboxexturl
-				sudo vboxmanage extpack install $vboxext | tee -a $logfile
-			fi
-		fi
-	fi
-	rm $vboxext
-	print_status "Done Installing VirtualBox and VirtualBox Extension Pack."
-}
-
-configure_repos(){
-	local logfile="$LOG_DIR/configure_repos.log"
-	print_header "Configuring Debian Repositories."
-	sudo mv /etc/apt/sources.list /etc/apt/sources.list_old
-	local sources_list="
-		\rdeb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware\n
-		\rdeb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware\n
-		\rdeb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware\n
-		\rdeb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware\n
-		\rdeb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware\n
-		\rdeb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"
-	echo -e $sources_list | sudo tee /etc/apt/sources.list > $logfile
-	print_status "Finished Configuring Debian Repositories."
-}
-
-install_nvidia_drivers(){
-	local logfile="$LOG_DIR/install_nvidia_drivers.log"
-	print_header "Installing Nvidia Graphics Drivers."
-	echo -ne "\e[1;36m[+] Install NVIDIA Graphics Drivers?[Y/n]>>\e[0m "
-	read user_input
-	if [ "${user_input,,}" == "y" ];then
-		print_status "Doing an update."
-		sudo apt-get update >> $logfile
-		print_status "Installing: nvidia-driver"
-		sudo apt-get -y install nvidia-driver >> $logfile
-		print_status "Installing: firmware-misc-nonfree"
-		sudo apt-get -y install firmware-misc-nonfree >> $logfile
-		if [ $? -eq 0 ]; then
-			print_status "Finished Installing Nvidia Graphics Drivers."
-		else
-			print_error "Something went wrong. Nvidia Drivers not installed!"
-		fi 
-	else
-		echo -ne "\e[1;31m[+] Will not Install NVIDIA Graphics Drivers\n\e[0m"
-	fi
+install_panel_profiles(){
+	local logfile="$LOG_DIR/xfce4-panel-profiles.log"
+	print_header "Installing xfce4-panel-profiles"
+	git clone "https://gitlab.xfce.org/apps/xfce4-panel-profiles.git"
+	cd "xfce4-panel-profiles"
+	print_status "Running: sh configure"
+	sh configure >> $logfile
+	print_status "Running: make"
+	make >> $logfile
+	print_status "Running: sudo make install"
+	sudo make install >> $logfile
+	cd ..
 }
 
 install_protonvpn(){
@@ -148,17 +75,6 @@ install_obsidian(){
 	sudo gdebi -n $obdeb >> $logfile
 	print_status "Finished installing Obsidian"
 	rm $obdeb
-}
-
-install_discord_plus(){
-	print_header "Setting Up Discord_plus"
-	local giturl="https://github.com/t0nyc23/discord_plus"
-	local cloned=$HOME/.local/share/Discord_plus
-	print_status "Cloning Repository"
-	git clone $giturl $cloned
-	print_status "Running install script"
-	cd $cloned && bash install.sh && cd -
-	print_status "Discord_plus is now installed"
 }
 
 install_brave(){

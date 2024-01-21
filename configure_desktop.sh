@@ -3,32 +3,43 @@
 source utils_and_vars.sh
 
 install_themes(){
+	local lightdm_dest="/etc/lightdm/"
+	
 	local themes_dest="/usr/share/themes/"
 	local icons_dest="/usr/share/icons/"
-	local bg_dest="/usr/share/backgrounds/"
-	local bg_default="/usr/share/images/desktop-base/default"
-	local lightdm_dest="/etc/lightdm/"
-	local git_repo="https://github.com/t0nyc23/non-themes"
+	local theme_link="https://gitlab.com/kalilinux/packages/gnome-theme-kali/-/archive/kali/master/gnome-theme-kali-kali-master.zip"
 
-	print_header "Installing and configuring themes."
-	print_status "Cloning $git_repo"
-	git clone -q $git_repo
-	cd non-themes
-	
-	print_status "Installing non-gtk-dark theme."
-	sudo cp -r non-gtk-dark $themes_dest
-	print_status "Installing non-gtk-darker theme."
-	sudo cp -r non-gtk-darker $themes_dest
-	print_status "Installing non-blue-icons theme."
-	sudo cp -r non-blue-icons $icons_dest
-	print_status "Installing LightDM greeter configuration."
-	sudo cp lightdm-gtk-greeter.conf $lightdm_dest
-	print_status "Adding background.jpg to /usr/share/backgrounds."
-	sudo cp background.jpg $bg_dest
-	print_status "Creating symlink for backround.jpg"
-	sudo ln -sf $bg_dest/background.jpg $bg_default
+	local bg_link="https://gitlab.com/kalilinux/packages/kali-wallpapers/-/raw/kali/master/legacy/backgrounds/kali-1.1/kali-1.1-2560x1440.png?ref_type=heads"
+	local bg_dest="/usr/share/backgrounds/kali-16x9/kali-old.png"
+	local bg_default="/usr/share/backgrounds/kali-16x9/default"
+
+
+	print_header " Installing and configuring themes."
+	mkdir tmp && cd tmp
+	print_status "Downloading theme zip archive."
+	wget -qO "theme.zip" $theme_link
+	print_status "Extracting theme zip archive."
+	unzip -q "theme.zip" 
+
+	local theme_src="gnome-theme-kali-kali-master/GTK-And-GnomeShell-Theme/*"
+	local icons_src="gnome-theme-kali-kali-master/Icon-Theme/*"
+	print_status "Copying Theme to $themes_dest"
+	sudo cp -r $theme_src $themes_dest
+	print_status "Copying Icons to $icons_dest"
+	sudo cp -r $icons_src $icons_dest
+
+	print_status "Downloading default background wallpaper."
+	wget -qO "kali-old.png" $bg_link
+	print_status "Moving wallpaper to $bg_dest"
+	sudo cp "kali-old.png" $bg_dest
+	print_status "Creating link for $bg_dest"
+	sudo ln -sf $bg_dest $bg_default
+
+
+	print_status "Cleaning up."
+	cd .. && rm -rf tmp
+
 }
-
 
 configure_xfce4_desktop(){	
 	local dest_xfce_conf="$HOME/.config/xfce4"
@@ -40,9 +51,9 @@ configure_xfce4_desktop(){
 	cp -r $src_xfce_conf $dest_xfce_conf
 	
 	print_status "Applying themes."
-	xfconf-query -c xfwm4 -p /general/theme -s non-gtk-dark
-	xfconf-query -c xsettings -p /Net/ThemeName -s non-gtk-dark
-	xfconf-query -c xsettings -p /Net/IconThemeName -s non-blue-icons
+	xfconf-query -c xfwm4 -p /general/theme -s Kali-X
+	xfconf-query -c xsettings -p /Net/ThemeName -s Kali-X
+	xfconf-query -c xsettings -p /Net/IconThemeName -s Vibrancy-Kali-Full-Dark
 
 	print_status "Importing custom panel configuration."
 	xfce4-panel-profiles load $panel_config
@@ -59,17 +70,6 @@ configure_move2screen(){
 		print_status "Done"
 	else
 		print_error "Failed to configure move2screen"
-	fi
-}
-
-configure_super_key(){
-	local autostart_dir="$CONFIG_DIR/autostart"
-	print_header "Configuring Super Key to open Menu"
-	cp -r $autostart_dir "$HOME/.config"
-	if [ $? -eq 0 ];then
-		print_status "All ok"
-	else
-		print_error "Failed to configure super key menu"
 	fi
 }
 

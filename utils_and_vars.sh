@@ -1,7 +1,7 @@
 #!/bin/bash
 CRESET="\e[0m"
 RED="\e[1;31m"
-CYAN="\e[1;36m"
+CYAN="\e[1;34m"
 
 LOG_DIR="$HOME/Desktop/build/"
 LOG_OUT="$HOME/Desktop/build.log"

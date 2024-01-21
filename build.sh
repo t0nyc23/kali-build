@@ -15,15 +15,11 @@ fi
 #[INSTALL BASICS]
 #-------------------------------------
 basics_cmds=(
-'configure_repos'
 'install_basic_utils'
-'install_nvidia_drivers'
-'install_virtualbox'
-'install_snap_tools'
+'install_panel_profiles'
 'install_protonvpn'
 'install_veracrypt'
 'install_obsidian'
-'install_discord_plus'
 'install_brave'
 'install_sublime'
 )
@@ -42,7 +38,6 @@ config_cmds=(
 	'install_themes'
 	'configure_xfce4_desktop'
 	'configure_move2screen'
-	'configure_super_key'
 	'configure_bashrc'
 	'configure_tmux'
 	'configure_sublime'
