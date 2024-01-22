@@ -104,11 +104,11 @@ configure_bashrc(){
 	print_status "Configuring shell for $me"
 	sudo chsh -s /usr/bin/bash $me
 	print_status "Configuring shell for root"
-	sudo chsh -s /usr/bin/bash $USER
+	sudo chsh -s /usr/bin/bash root
 	print_status "Copying $bashrc_file for $USER"
 	cp $bashrc_file $HOME/.bashrc
 	print_status "Copying $bashrc_file for root"
-	sudo cp $bashrc_file $HOME/.bashrc
+	sudo cp $bashrc_file "/root/.bashrc"
 }
 
 configure_tmux(){

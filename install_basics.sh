@@ -8,7 +8,7 @@ install_basic_utils(){
 		'net-tools' 'tmux' 'vim' 'htop' 'git'
 		'flameshot' 'wget' 'vlc' 'curl' 'zip'
 		'xcape' 'prips' 'xdotool' 'dnsutils'
-		'piper' 'gdebi' 'gparted' 'cherrytree'
+		'gdebi' 'gparted' 'cherrytree'
 		'linux-headers-amd64' 'wmctrl' 'peek'
 		'lightdm-gtk-greeter-settings' 'xfce4-terminal' 'plocate'
 		'libxfce4ui-2-dev' 'python3-psutil' 'make' 'gettext' 'intltool'

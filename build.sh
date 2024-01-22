@@ -41,6 +41,7 @@ config_cmds=(
 	'configure_bashrc'
 	'configure_tmux'
 	'configure_sublime'
+	'configure_firefox'
 )
 print_header "Making Desktop Configurations."
 for task in "${config_cmds[@]}";do
