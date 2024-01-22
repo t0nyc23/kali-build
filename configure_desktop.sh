@@ -2,6 +2,24 @@
 
 source utils_and_vars.sh
 
+
+configure_firefox(){
+	local policies_src="$FILES_DIR/policies.json"
+	local policies_dest="/usr/share/firefox-esr/distribution/policies.json"
+	local firefox_conf="$FILES_DIR/firefox"
+	local dot_mozzila="$HOME/.mozilla"
+
+	print_header "Configuring Firefox."
+	print_status "Copying $policies_src to $policies_dest"
+	sudo cp $policies_src $policies_dest
+
+	print_status "Creating $dot_mozzila directory"
+	mkdir -p $dot_mozzila
+
+	print_status "Copying Firefox configuration"
+	cp -r $firefox_conf "$dot_mozzila/firefox"
+}
+
 install_themes(){
 	local themes_dest="/usr/share/themes/"
 	local icons_dest="/usr/share/icons/"
