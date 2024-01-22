@@ -42,7 +42,7 @@ install_themes(){
 configure_xfce4_desktop(){	
 	local dest_xfce_conf="$HOME/.config/xfce4"
 	local src_xfce_conf="$CONFIG_DIR/xfce4/*"
-	local panel_config="$FILES_DIR/non-custom-panel.tar.bz2"
+	local panel_config="$FILES_DIR/kali-custom-panel.tar.bz2"
 	local lightdm_dest="/etc/lightdm/"
 	local lightdm_src="$FILES_DIR/lightdm-gtk-greeter.conf"
 	
