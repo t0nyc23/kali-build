@@ -8,9 +8,6 @@ Execute the following:
 Reboot after the scripts have finished the setup.
 
 ### TO DO
-- fix libxfce4ui error
-- fix lightdm conf file (not found)
 - configure firefox
 - install nonghost
 - tor
-- no custom themes?

@@ -60,6 +60,9 @@ configure_xfce4_desktop(){
 	
 	print_status "Installing LightDM greeter configuration."
 	sudo cp $lightdm_src $lightdm_dest
+
+	print_status "Make xfce4-terminal the default terminal emulator."
+	sudo update-alternatives --set x-terminal-emulator "/usr/bin/xfce4-terminal.wrapper"
 }
 
 configure_move2screen(){
