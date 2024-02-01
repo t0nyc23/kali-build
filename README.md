@@ -11,3 +11,8 @@ Reboot after the scripts have finished the setup.
 - configure firefox
 - install nonghost
 - tor
+- tor browser
+- remmina?
+- gnome-remote-desktop?
+- fix xfce panel theme
+- vscodium (snyk ext?)?
